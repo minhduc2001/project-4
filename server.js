@@ -6,7 +6,9 @@ const app = express()
 const { engine } = require('express-handlebars')
 const routes = require('./routes/route')
 const cors = require('cors')
+const morgan = require('morgan')
 
+app.use(morgan("dev"))
 app.use(cors())
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
