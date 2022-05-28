@@ -31,7 +31,8 @@ class HomeController {
 
     async getAllcommentByMusic(req, res){
         try {
-            const listCmt =await comment.find({Music: req.query.music})
+            const listCmt =await Comment.find({Music: req.query.id}).sort({createdAt: -1})
+                                    
             res.status(200).json(listCmt);
         } catch (error) {
             res.status(500).json(error);
