@@ -6,5 +6,6 @@ router.get('/', homeController.homePage)
 router.get('/list', homeController.sendListSongs)
 router.get('/stream', homeController.handle);
 router.get('/download', homeController.download);
+router.get('/test', homeController.pushMusic);
 
 module.exports = router;

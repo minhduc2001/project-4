@@ -1,20 +1,50 @@
-const music = require('../model/music')
+const Music = require('../model/Music')
 const path = require('path')
 const fs = require('fs')
+const Comment = require('../model/Cmt')
+const ms = require('../model/ms')
 
 // let file = '';
-
-console.log(music);
 class HomeController {
     homePage(req, res) {
         
             res.render('test', {music:music});
     }
-    sendListSongs(req, res) {
+    async sendListSongs(req, res) {
         try {
-            res.status(200).json(music)
+            const musics = await Music.find();
+            res.status(200).json(musics)
         } catch (error) {
 
+        }
+    }
+
+    async pushMusic(req, res) {
+        try {
+            const music = new Music(req.body);
+            music.save();
+            res.send(200)
+        } catch (error) {
+            
+        }
+    }
+
+    async getAllcommentByMusic(req, res){
+        try {
+            const listCmt =await comment.find({Music: req.query.music})
+            res.status(200).json(listCmt);
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    }
+
+    async pushedComment(req, res){
+        try {
+            const comment = new Comment(req.body);
+            await comment.save();
+            res.status(200).json('save ok!');
+        } catch (error) {
+            res.status(500).json(error);
         }
     }
 
